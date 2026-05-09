@@ -175,14 +175,23 @@ img {
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
 }
 
 .nav-logo span {
   color: var(--color-accent);
+}
+
+.brand-logo-image {
+  width: clamp(11.5rem, 16vw, 15rem);
+  height: auto;
+  display: block;
+}
+
+.brand-logo-image.compact {
+  width: clamp(9rem, 12vw, 11rem);
 }
 
 .nav-links {
