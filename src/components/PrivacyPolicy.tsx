@@ -7,7 +7,7 @@ const PrivacyPolicy: React.FC = () => {
         <div className="policy-hero">
           <span className="about-eyebrow">Privacy Policy</span>
           <h1>Privacy Policy</h1>
-          <p>Last Updated: 1 May 2026</p>
+          <p>Last Updated: 5 May 2026</p>
         </div>
 
         <div className="policy-content">
@@ -17,32 +17,31 @@ const PrivacyPolicy: React.FC = () => {
               Welcome to Avon Housing. We are committed to protecting your privacy and ensuring
               that your personal information is handled in a safe and responsible manner. This
               Privacy Policy explains how we collect, use, and safeguard your information when you
-              visit our website.
+              use our website, search for properties, or request consultations.
             </p>
           </article>
 
           <article>
             <h2>2. Information We Collect</h2>
             <h3>a) Personal Information</h3>
-            <p>We may collect personal information that you voluntarily provide, including:</p>
+            <p>We collect personal information that you voluntarily provide to us, including:</p>
             <ul>
-              <li>Name</li>
-              <li>Email address</li>
-              <li>Phone number</li>
-              <li>Property inquiry details</li>
+              <li><strong>Account Information:</strong> Name, email address, phone number, and profile picture provided when you sign in via Firebase Authentication.</li>
+              <li><strong>Consultation & Inquiry Details:</strong> Name, phone number, email, property preferences (budget, location, BHK, type), and specific properties you are interested in.</li>
             </ul>
             <p>This information is collected when you:</p>
             <ul>
-              <li>Fill out contact or inquiry forms</li>
-              <li>Request a consultation</li>
+              <li>Sign in or create an account</li>
+              <li>Submit a property consultation or inquiry form</li>
+              <li>Interact with our property listings</li>
             </ul>
 
-            <h3>b) Non-Personal Information</h3>
-            <p>We may automatically collect certain non-personal data, such as:</p>
+            <h3>b) Usage Information</h3>
+            <p>We automatically collect certain data to improve your experience, such as:</p>
             <ul>
-              <li>IP address</li>
-              <li>Browser type and device information</li>
-              <li>Pages visited and time spent on the website</li>
+              <li><strong>Activity Data:</strong> Property views, saved favorites, and recently viewed properties.</li>
+              <li><strong>Device Information:</strong> IP address, browser type, and device identifiers.</li>
+              <li><strong>Interaction Logs:</strong> Pages visited and time spent on specific property details.</li>
             </ul>
           </article>
 
@@ -50,82 +49,79 @@ const PrivacyPolicy: React.FC = () => {
             <h2>3. How We Use Your Information</h2>
             <p>We use the collected information to:</p>
             <ul>
-              <li>Respond to your inquiries and provide property-related assistance</li>
-              <li>Connect you with relevant property listings or services</li>
-              <li>Improve our website functionality and user experience</li>
-              <li>Ensure security and prevent fraudulent activity</li>
+              <li>Process your property inquiries and schedule consultations</li>
+              <li>Personalize your experience (e.g., "Saved Properties", "Recently Viewed")</li>
+              <li>Provide customer support and respond to your requests</li>
+              <li>Analyze market trends and property popularity to improve our services</li>
+              <li>Maintain the security of our platform and prevent fraudulent activity</li>
             </ul>
           </article>
 
           <article>
-            <h2>4. Cookies and Tracking Technologies</h2>
-            <p>Our website may use cookies or similar technologies to:</p>
-            <ul>
-              <li>Enhance user experience</li>
-              <li>Analyze website traffic</li>
-            </ul>
-            <p>You can choose to disable cookies through your browser settings.</p>
-          </article>
-
-          <article>
-            <h2>5. Sharing of Information</h2>
-            <p>We do not sell, rent, or trade your personal information.</p>
-            <p>We may share your information only in the following cases:</p>
-            <ul>
-              <li>With property owners or representatives when you make an inquiry</li>
-              <li>With service providers, such as hosting or analytics tools</li>
-              <li>If required by law or legal process</li>
-            </ul>
-          </article>
-
-          <article>
-            <h2>6. Data Security</h2>
+            <h2>4. Storage and Security</h2>
             <p>
-              We implement appropriate technical and organizational measures to protect your
-              personal data. However, no online platform can guarantee complete security.
+              We use <strong>Firebase</strong> (a Google service) for secure authentication and user management. 
+              Personal data submitted through forms (such as inquiries and consultation requests) is 
+              stored in our <strong>MongoDB</strong> database.
             </p>
+            <p>
+              While we implement robust security measures to protect your data within our database and 
+              hosting environment, no electronic transmission or storage is 100% secure, and we 
+              cannot guarantee absolute security.
+            </p>
+          </article>
+
+          <article>
+            <h2>5. Cookies and Local Storage</h2>
+            <p>
+              We use <strong>Local Storage</strong> and cookies to provide essential features such as:
+            </p>
+            <ul>
+              <li>Maintaining your session and login state</li>
+              <li>Storing your "Favorite Properties" locally for quick access</li>
+              <li>Tracking your "Recently Viewed" history</li>
+            </ul>
+            <p>You can manage or clear these through your browser settings.</p>
+          </article>
+
+          <article>
+            <h2>6. Sharing of Information</h2>
+            <p>We value your privacy and do not sell or rent your personal data to third parties.</p>
+            <p>We may share your information in limited circumstances:</p>
+            <ul>
+              <li><strong>Internal Experts:</strong> With our real estate consultants to fulfill your consultation requests.</li>
+              <li><strong>Third-Party Services:</strong> With providers like Firebase for authentication and Google Maps for property location services.</li>
+              <li><strong>Legal Requirements:</strong> If required by law or to protect our legal rights.</li>
+            </ul>
           </article>
 
           <article>
             <h2>7. Third-Party Services</h2>
-            <p>Our website may use third-party services such as:</p>
+            <p>Our website integrates services from third-party providers:</p>
             <ul>
-              <li>Google Maps, for property location display</li>
-              <li>Analytics tools, if implemented in future</li>
+              <li><strong>Firebase:</strong> Authentication and user data management.</li>
+              <li><strong>MongoDB:</strong> Secure database hosting for property and inquiry data.</li>
+              <li><strong>Google Maps:</strong> Displaying property locations.</li>
+              <li><strong>YouTube:</strong> Displaying property video walkthroughs.</li>
             </ul>
-            <p>These services may collect data according to their own privacy policies.</p>
+            <p>These providers have their own privacy policies governing how they handle your data.</p>
           </article>
 
           <article>
-            <h2>8. Links to External Websites</h2>
-            <p>
-              Our website may contain links to third-party websites. We are not responsible for the
-              privacy practices or content of those websites.
-            </p>
-          </article>
-
-          <article>
-            <h2>9. User Rights</h2>
+            <h2>8. User Rights</h2>
             <p>You have the right to:</p>
             <ul>
-              <li>Request access to your personal data</li>
-              <li>Request correction or deletion of your data</li>
+              <li>Access the personal information we hold about you</li>
+              <li>Request correction of inaccurate data</li>
+              <li>Request deletion of your account and personal information</li>
+              <li>Opt-out of property tracking and personalization</li>
             </ul>
-            <p>To exercise these rights, contact us using the details below.</p>
+            <p>To exercise these rights, please contact us using the details below.</p>
           </article>
 
           <article>
-            <h2>10. Future Updates</h2>
-            <p>
-              If features like user accounts, login/signup, or databases such as Firebase or
-              MongoDB are implemented in the future, this Privacy Policy will be updated
-              accordingly.
-            </p>
-          </article>
-
-          <article>
-            <h2>11. Contact Us</h2>
-            <p>If you have any questions or concerns regarding this Privacy Policy, you may contact us:</p>
+            <h2>9. Contact Us</h2>
+            <p>If you have any questions or concerns regarding this Privacy Policy or your data, please contact us:</p>
             <address>
               <strong>Avon Housing</strong><br />
               Email: <a href="mailto:avon_housing@rediffmail.com">avon_housing@rediffmail.com</a><br />
@@ -142,3 +138,4 @@ const PrivacyPolicy: React.FC = () => {
 };
 
 export default PrivacyPolicy;
+

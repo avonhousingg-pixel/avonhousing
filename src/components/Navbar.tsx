@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { onAuthStateChanged, signOut, type User } from 'firebase/auth';
 import { getUserAccess } from '../lib/api';
 import { getFirebaseAuth, isFirebaseConfigured } from '../lib/firebase';
-import BrandLogo from './BrandLogo';
 
 interface Props {
   currentPath: string;
@@ -205,7 +204,7 @@ const Navbar: React.FC<Props> = ({ currentPath, currentHash }) => {
       >
         <div className="container navbar-container">
           <a href="/" className="nav-logo">
-            <BrandLogo />
+            Avon Housing<span>.</span>
           </a>
           
           {userIsAdmin ? (

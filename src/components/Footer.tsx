@@ -1,5 +1,4 @@
 import React from 'react';
-import BrandLogo from './BrandLogo';
 
 const Footer: React.FC = () => {
   return (
@@ -8,7 +7,7 @@ const Footer: React.FC = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="/" className="nav-logo">
-              <BrandLogo compact />
+              Avon Housing<span className="text-accent">.</span>
             </a>
             <p className="footer-tagline">
               Western Mumbai's focused real estate consultancy, driven by relationships and defined by local expertise.
@@ -40,7 +39,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="footer-title">Quick Links</h4>
             <div className="footer-links">
-              <a href="/#properties">Properties</a>
+              <a href="/properties">Properties</a>
               <a href="/#services">Services</a>
               <a href="/about">About Us</a>
               <a href="/privacy-policy">Privacy Policy</a>

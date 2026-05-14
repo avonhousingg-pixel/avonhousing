@@ -46,6 +46,12 @@ const getFilterSummary = () => {
   return summary.length ? summary.join(' - ') : 'All active listings';
 };
 
+const categoryLabels: Record<string, string> = {
+  'featured': 'Featured Collection',
+  'under-construction': 'Under Construction',
+  'assured-resale': 'Assured Resale',
+};
+
 const AllPropertiesPage: React.FC = () => {
   const [properties, setProperties] = useState<PropertyRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -68,9 +74,38 @@ const AllPropertiesPage: React.FC = () => {
     return () => window.removeEventListener('popstate', loadProperties);
   }, []);
 
+  const query = getPropertyQuery();
+  const isFilteredByCategory = Boolean(query.category);
+
+  const renderPropertyGrid = (props: PropertyRecord[]) => (
+    <div className="all-properties-grid" aria-label="Properties">
+      {props.map(property => (
+        <PropertyCard key={property._id} property={property} variant="list" />
+      ))}
+    </div>
+  );
+
+  const grouped = properties.reduce((acc, property) => {
+    const cat = property.category || 'other';
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(property);
+    return acc;
+  }, {} as Record<string, PropertyRecord[]>);
+
+  // Define sort order for categories
+  const categoryOrder = ['featured', 'under-construction', 'assured-resale'];
+  const sortedCategories = Object.keys(grouped).sort((a, b) => {
+    const indexA = categoryOrder.indexOf(a);
+    const indexB = categoryOrder.indexOf(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+
   return (
     <section className="all-properties-page">
       <div className="container">
+        <a href="/" className="property-back-link">Back to Home</a>
         <div className="all-properties-hero">
           <span className="about-eyebrow">Properties</span>
           <h1>
@@ -82,10 +117,17 @@ const AllPropertiesPage: React.FC = () => {
         {loading ? (
           <p className="property-empty-state">Loading properties...</p>
         ) : properties.length > 0 ? (
-          <div className="all-properties-grid" aria-label="All properties">
-            {properties.map(property => (
-              <PropertyCard key={property._id} property={property} variant="list" />
-            ))}
+          <div className="all-properties-content">
+            {isFilteredByCategory ? (
+              renderPropertyGrid(properties)
+            ) : (
+              sortedCategories.map(cat => (
+                <div key={cat} className="property-category-section">
+                  <h2 className="category-section-title">{categoryLabels[cat] || cat}</h2>
+                  {renderPropertyGrid(grouped[cat])}
+                </div>
+              ))
+            )}
           </div>
         ) : (
           <p className="property-empty-state">No properties match this search yet.</p>

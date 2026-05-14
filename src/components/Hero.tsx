@@ -29,8 +29,8 @@ const Hero: React.FC<Props> = ({ isLoaded }) => {
             <span className="stat-label">Sales Volume</span>
           </div>
           <div className="stat-item">
-            <Counter end={10} suffix={<span className="stat-suffix">&nbsp;yrs</span>} delay={700} active={isLoaded} />
-            <span className="stat-label">Local Expertise</span>
+            <Counter end={25} suffix={<span className="stat-suffix">+ yrs</span>} delay={700} active={isLoaded} />
+            <span className="stat-label">Market Expertise and Client Trust</span>
           </div>
           <div className="stat-item">
             <Counter end={500} suffix={<span className="stat-suffix">+</span>} delay={700} active={isLoaded} />
@@ -55,3 +55,4 @@ const Hero: React.FC<Props> = ({ isLoaded }) => {
 };
 
 export default Hero;
+

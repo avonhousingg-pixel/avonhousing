@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 import type { PropertyRecord } from '../lib/api';
 import { isFavouriteProperty, toggleFavouriteProperty } from '../lib/favourites';
+import { getFirebaseAuth, isFirebaseConfigured } from '../lib/firebase';
 import { getPropertyTypeLabel } from '../data/siteContent';
 
 type PropertyCardProps = {
@@ -16,6 +18,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, className = '', l
   const [favourite, setFavourite] = useState(() => isFavouriteProperty(property._id));
   const [imageIndex, setImageIndex] = useState(0);
   const [isPreviewing, setIsPreviewing] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const href = `/properties/${property._id}`;
   const images = property.images?.length ? property.images : ['/mumbai-skyline.png'];
   const image = images[imageIndex] || images[0];
@@ -27,6 +30,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, className = '', l
     window.addEventListener('avon:favourites-changed', handleChange);
     return () => window.removeEventListener('avon:favourites-changed', handleChange);
   }, [property._id]);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) {
+      setIsLoggedIn(false);
+      return;
+    }
+
+    return onAuthStateChanged(getFirebaseAuth(), nextUser => {
+      setIsLoggedIn(Boolean(nextUser));
+    });
+  }, []);
 
   useEffect(() => {
     if (!showCarousel || !isPreviewing) {
@@ -54,6 +68,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, className = '', l
   const handleFavourite = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
+
+    if (!isLoggedIn) {
+      window.history.pushState({}, '', '/login');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      return;
+    }
+
     setFavourite(toggleFavouriteProperty(property));
   };
 

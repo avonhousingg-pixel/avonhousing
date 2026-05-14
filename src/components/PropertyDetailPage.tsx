@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 import { getProperty, trackPropertyView, type PropertyRecord } from '../lib/api';
 import { isFavouriteProperty, toggleFavouriteProperty } from '../lib/favourites';
 import { trackRecentlyViewedProperty } from '../lib/userActivity';
+import { getFirebaseAuth, isFirebaseConfigured } from '../lib/firebase';
 import { amenityOptions, getPropertyTypeLabel, type AmenityOption } from '../data/siteContent';
 
 const categoryLabels: Record<string, string> = {
@@ -302,9 +304,20 @@ const hasInsightDetails = (property: PropertyRecord) => {
   );
 };
 
-const PropertyInsightSections = ({ property }: { property: PropertyRecord }) => {
+const PropertyInsightSections = ({ property, isUserLoggedIn }: { property: PropertyRecord; isUserLoggedIn: boolean }) => {
   const details = property.insightDetails;
+  const [vastuAccessMessage, setVastuAccessMessage] = useState('');
   if (!details || !hasInsightDetails(property)) return null;
+
+  const handleVastuClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isUserLoggedIn) {
+      setVastuAccessMessage('');
+      return;
+    }
+
+    event.preventDefault();
+    setVastuAccessMessage('Only logged in users can view it.');
+  };
 
   return (
     <section className="property-info-panel property-wide-panel property-insights-panel">
@@ -324,13 +337,14 @@ const PropertyInsightSections = ({ property }: { property: PropertyRecord }) => 
       {details.vastuImage && (
         <div className="property-insight-section" id="vastu-chart">
           <h2>Vastu Chart</h2>
-          <a className="property-vastu-card" href={details.vastuImage} target="_blank" rel="noreferrer">
+          <a className="property-vastu-card" href={details.vastuImage} target="_blank" rel="noreferrer" onClick={handleVastuClick}>
             <img src={details.vastuImage} alt={`${property.title} Vastu grid`} />
             <span className="property-vastu-overlay">
               <span className="property-vastu-mark" aria-hidden="true">View</span>
               <strong>View Vastu Grid</strong>
             </span>
           </a>
+          {vastuAccessMessage && <p className="property-access-message" role="alert">{vastuAccessMessage}</p>}
         </div>
       )}
 
@@ -394,6 +408,7 @@ const PropertyDetailPage: React.FC = () => {
   const [favourite, setFavourite] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
     const id = window.location.pathname.split('/').filter(Boolean).pop() || '';
@@ -410,6 +425,17 @@ const PropertyDetailPage: React.FC = () => {
       })
       .catch(error => setError(error instanceof Error ? error.message : 'Unable to load this property.'))
       .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) {
+      setIsUserLoggedIn(false);
+      return;
+    }
+
+    return onAuthStateChanged(getFirebaseAuth(), nextUser => {
+      setIsUserLoggedIn(Boolean(nextUser));
+    });
   }, []);
 
   if (loading) {
@@ -493,7 +519,14 @@ const PropertyDetailPage: React.FC = () => {
             <button
               type="button"
               className={`btn-primary property-wide-action ${favourite ? 'saved' : ''}`}
-              onClick={() => setFavourite(toggleFavouriteProperty(property))}
+              onClick={() => {
+                if (!isUserLoggedIn) {
+                  window.history.pushState({}, '', '/login');
+                  window.dispatchEvent(new PopStateEvent('popstate'));
+                  return;
+                }
+                setFavourite(toggleFavouriteProperty(property));
+              }}
             >
               {favourite ? 'Remove from Favourites' : 'Add to Favourites'}
             </button>
@@ -535,7 +568,7 @@ const PropertyDetailPage: React.FC = () => {
             </section>
           )}
 
-          <PropertyInsightSections property={property} />
+          <PropertyInsightSections property={property} isUserLoggedIn={isUserLoggedIn} />
 
           {mapsEmbedHref && (
             <section className="property-info-panel property-wide-panel property-location-panel">

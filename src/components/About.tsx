@@ -3,16 +3,28 @@ import { WordReveal } from './WordReveal';
 
 const leaders = [
   {
-    name: 'Sonal Jain',
-    role: 'Founder and Principal Advisor',
+    name: 'Shubh Singh',
+    role: 'Relationship Manager',
+    image: '/team/shubh-singh.jpg',
+    description: 'Guides clients through requirements, shortlisting, site visits, and follow-ups with a calm, relationship-first approach.',
   },
   {
-    name: 'Avon Advisory Desk',
-    role: 'Client Experience',
+    name: 'Nunnu Jha',
+    role: 'Residential Resale Expert',
+    image: '/team/nunnu-jha.jpg',
+    description: 'Specializes in resale homes, local pricing context, buyer-seller coordination, and practical transaction guidance.',
   },
   {
-    name: 'Market Research Team',
-    role: 'Property Intelligence',
+    name: 'Ankit Singh',
+    role: 'Rental Advisory Specialist',
+    image: '/team/ankit-singh.jpg',
+    description: 'Helps owners and tenants match the right rental requirements with verified options and smooth visit coordination.',
+  },
+  {
+    name: 'Shubham Singh',
+    role: 'Rental Portfolio Manager',
+    image: '/team/shubham-singh.jpg',
+    description: 'Manages rental inventory, owner relationships, tenant follow-ups, and portfolio availability across key local markets.',
   },
 ];
 
@@ -24,7 +36,7 @@ const About: React.FC = () => {
           <div>
             <span className="about-eyebrow">About Avon</span>
             <h2 className="about-hero-title">
-              <WordReveal text="A refined way to discover, evaluate, and secure real estate." intersect={true} />
+              <WordReveal text="Mumbai's trusted real estate partner since 1998." intersect={true} />
             </h2>
           </div>
           <div className="about-hero-media image-placeholder scale-reveal">
@@ -41,12 +53,21 @@ const About: React.FC = () => {
           </div>
           <div className="about-copy scroll-animate">
             <p>
-              Avon Housing brings a private, advisory-led approach to real estate across Borivali,
-              Kandivali, and Mumbai's western suburbs.
+              Avon Housing was founded and built in 1998 as a trusted real estate firm in Mumbai.
+              Our main motto has always been to help people buy their ideal home without hassle or risk.
             </p>
             <p style={{ transitionDelay: '0.2s' }}>
-              We combine local market relationships, verified property intelligence, and careful
-              negotiation support so every client can move with clarity.
+              Our mission is simple: to make property affordable, transactions smooth, secure, and
+              valuable for every client.
+            </p>
+            <p style={{ transitionDelay: '0.3s' }}>
+              Whether you are searching for your dream home, a profitable investment, or the right
+              rental, Avon Housing ensures personalized guidance at every step.
+            </p>
+            <p style={{ transitionDelay: '0.4s' }}>
+              Built on the pillars of trust, professionalism, and long-term relationships, we have
+              successfully assisted countless families, investors, and businesses in finding
+              properties that truly match their goals.
             </p>
           </div>
         </div>
@@ -56,16 +77,16 @@ const About: React.FC = () => {
             <span className="about-panel-index">01</span>
             <h3>Our Mission</h3>
             <p>
-              Simplify complex property decisions with transparent guidance, curated options, and
-              dependable support from first search to final handover.
+              Make property affordable, transactions smooth, secure, and valuable while giving every
+              client clear, personalized guidance from search to final handover.
             </p>
           </div>
           <div className="about-panel scroll-animate-right">
             <span className="about-panel-index">02</span>
             <h3>Our Vision</h3>
             <p>
-              Build the most trusted local destination for discerning buyers, sellers, and investors
-              who value discretion and certainty.
+              Continue growing as Mumbai's most dependable real estate partner for families,
+              investors, businesses, buyers, sellers, and renters.
             </p>
           </div>
         </div>
@@ -76,18 +97,18 @@ const About: React.FC = () => {
           </div>
           <div className="about-feature-copy scroll-animate">
             <span className="about-eyebrow">Our Approach</span>
-            <h3>Reimagine today's property journey</h3>
+            <h3>Personalized guidance at every step</h3>
             <p>
-              We blend digital convenience with expert human judgement: shortlisting, site visits,
-              pricing context, legal coordination, and closing support are handled as one thoughtful
-              experience.
+              We combine local market relationships, verified property intelligence, careful
+              shortlisting, site visits, pricing context, documentation support, and negotiation
+              guidance into one thoughtful experience.
             </p>
           </div>
         </div>
 
         <div className="about-milestone scroll-animate">
           <h3>
-            Redefining the local real estate landscape, one considered move at a time.
+            Built on trust, professionalism, and long-term relationships since 1998.
           </h3>
         </div>
 
@@ -95,11 +116,12 @@ const About: React.FC = () => {
           {leaders.map((leader, index) => (
             <article className="about-person scroll-animate" key={leader.name} style={{ transitionDelay: `${index * 0.15}s` }}>
               <div className="about-person-mark">Avon.</div>
-              <div className="about-person-image image-placeholder scale-reveal" style={{ transitionDelay: `${index * 0.15 + 0.1}s` }}>
-                <span>Portrait</span>
+              <div className="about-person-image scale-reveal" style={{ transitionDelay: `${index * 0.15 + 0.1}s` }}>
+                <img src={leader.image} alt={`${leader.name}, ${leader.role}`} />
               </div>
               <h4>{leader.name}</h4>
-              <p>{leader.role}</p>
+              <p className="about-person-role">{leader.role}</p>
+              <p className="about-person-description">{leader.description}</p>
             </article>
           ))}
         </div>
@@ -137,3 +159,6 @@ const About: React.FC = () => {
 };
 
 export default About;
+
+
+

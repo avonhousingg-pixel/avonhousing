@@ -10,7 +10,6 @@ import {
 } from 'firebase/auth';
 import { getUserAccess, saveUserProfile } from '../lib/api';
 import { getFirebaseAuth, isFirebaseConfigured } from '../lib/firebase';
-import BrandLogo from './BrandLogo';
 
 const adminEmail = (import.meta.env.VITE_ADMIN_EMAIL || 'avonhousingadmin2026@gmail.com').toLowerCase();
 
@@ -289,7 +288,7 @@ const LoginPage: React.FC = () => {
         <div className="login-panel">
           <header className="login-branding">
             <a href="/" className="nav-logo" onClick={handleLogoTap}>
-              <BrandLogo compact />
+              Avon<span>.</span>
             </a>
             <p>Find your perfect home in the Western Suburbs</p>
           </header>

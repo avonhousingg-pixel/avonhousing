@@ -24,6 +24,7 @@ import { usePageNavigation } from './hooks/usePageNavigation';
 const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const { hash, isTransitioning, path } = usePageNavigation();
+
   const isAboutPage = path === '/about';
   const isPrivacyPolicyPage = path === '/privacy-policy';
   const isConsultationPage = path === '/consultation';

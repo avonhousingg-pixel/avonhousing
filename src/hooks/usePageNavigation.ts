@@ -104,14 +104,11 @@ export const usePageNavigation = () => {
     window.addEventListener('popstate', handlePopState);
     window.addEventListener('hashchange', handleHashChange);
 
-    // Force redirect to home ONLY on initial refresh/mount
+    // Initialize path and hash on mount
     if (isInitialMount.current) {
       isInitialMount.current = false;
       if ('scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'manual';
-      }
-      if (window.location.hash) {
-        window.history.replaceState({}, '', '/');
       }
       setPath(window.location.pathname);
       setHash(window.location.hash);
