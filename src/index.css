@@ -185,13 +185,13 @@ img {
 
 .brand-logo-image {
   display: block;
-  width: 240px;
-  max-width: min(240px, 42vw);
+  width: 212px;
+  max-width: min(212px, 38vw);
   height: auto;
 }
 
 .brand-logo-image.compact {
-  width: 176px;
+  width: 172px;
 }
 
 .nav-links {
@@ -4504,9 +4504,14 @@ img {
 }
 
 .footer-brand .nav-logo {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 1.5rem;
   color: var(--color-light);
+}
+
+.footer-logo-image {
+  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.22));
 }
 
 .footer-tagline {
@@ -4546,6 +4551,17 @@ img {
 
 .footer-address p {
   color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 640px) {
+  .brand-logo-image {
+    width: 176px;
+    max-width: 54vw;
+  }
+
+  .brand-logo-image.compact {
+    width: 156px;
+  }
 }
 
 .footer-bottom {

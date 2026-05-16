@@ -1,4 +1,5 @@
 import React from 'react';
+import BrandLogo from './BrandLogo';
 
 const Footer: React.FC = () => {
   return (
@@ -7,7 +8,7 @@ const Footer: React.FC = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="/" className="nav-logo">
-              Avon Housing<span className="text-accent">.</span>
+              <BrandLogo compact className="footer-logo-image" />
             </a>
             <p className="footer-tagline">
               Western Mumbai's focused real estate consultancy, driven by relationships and defined by local expertise.
