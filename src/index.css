@@ -177,14 +177,21 @@ img {
 }
 
 .nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.28s ease, color 0.28s ease;
+  transform-origin: left center;
 }
 
-.nav-logo span {
-  color: var(--color-accent);
+.brand-logo-image {
+  display: block;
+  width: 240px;
+  max-width: min(240px, 42vw);
+  height: auto;
+}
+
+.brand-logo-image.compact {
+  width: 176px;
 }
 
 .nav-links {
@@ -4813,12 +4820,6 @@ img {
   transform: scaleX(var(--nav-progress, 0));
   transform-origin: left;
   transition: transform 0.12s linear;
-}
-
-.nav-logo {
-  display: inline-block;
-  transition: transform 0.28s ease, color 0.28s ease;
-  transform-origin: left center;
 }
 
 .navbar.scrolled .nav-logo {
